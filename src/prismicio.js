@@ -4,27 +4,19 @@ import sm from "../slicemachine.config.json"
 export const { repositoryName } = sm
 
 /**
- * The project's Prismic Route Resolvers. This list determines a Prismic document's URL.
- *
+ * A list of Route Resolver objects that define how a document's \`url\` field
+ * is resolved.
  * @type {prismic.ClientConfig['routes']}
  */
 const routes = [
   {
     type: "page",
-    path: "/:uid"
+    uid: "home",
+    path: "/:lang?"
   },
   {
     type: "page",
-    uid: "home",
-    path: "/"
-  },
-  {
-    type: "settings",
-    path: "/"
-  },
-  {
-    type: "navigation",
-    path: "/"
+    path: "/:lang?/:uid"
   }
 ]
 
@@ -34,7 +26,7 @@ const routes = [
  *
  * @param config {prismic.ClientConfig} - Configuration for the Prismic client.
  */
-export const createClient = (config) => {
+export const createClient = ({ previewData, req, ...config } = {}) => {
   const client = prismic.createClient(repositoryName, {
     accessToken: process.env.PRISMIC_NOVACTURE_TOKEN,
     routes,
@@ -45,7 +37,7 @@ export const createClient = (config) => {
     ...config
   })
 
-  prismicNext.enableAutoPreviews({ client })
+  prismicNext.enableAutoPreviews({ client, previewData, req })
 
   return client
 }

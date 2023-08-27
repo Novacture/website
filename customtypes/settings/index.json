@@ -21,6 +21,69 @@
           "label": "siteDescription",
           "placeholder": ""
         }
+      },
+      "logo": {
+        "type": "Image",
+        "config": {
+          "constraint": {},
+          "thumbnails": [],
+          "label": "Logo"
+        }
+      },
+      "newsletter_bar": {
+        "type": "Boolean",
+        "config": {
+          "label": "newsletter_bar",
+          "default_value": false,
+          "placeholder_true": "true",
+          "placeholder_false": "false"
+        }
+      },
+      "newsletterDescription": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Newsletter Description",
+          "placeholder": "Text above the sign up form",
+          "allowTargetBlank": true,
+          "multi": "heading1,paragraph,strong,em,hyperlink,list-item,o-list-item"
+        }
+      },
+      "newsletterDisclaimer": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Newsletter Disclaimer",
+          "placeholder": "Small text below sign up form",
+          "allowTargetBlank": true,
+          "multi": "paragraph,em,strong,hyperlink"
+        }
+      },
+      "contact_text": {
+        "type": "Text",
+        "config": {
+          "label": "contactText",
+          "placeholder": ""
+        }
+      },
+      "contact_phone": {
+        "type": "Text",
+        "config": {
+          "label": "contactPhone",
+          "placeholder": ""
+        }
+      },
+      "contact_email": {
+        "type": "Text",
+        "config": {
+          "label": "contactEmail",
+          "placeholder": ""
+        }
+      },
+      "address": {
+        "type": "Text",
+        "config": {
+          "label": "address",
+          "placeholder": ""
+        }
       }
     }
   }

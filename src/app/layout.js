@@ -43,7 +43,7 @@ export default async function RootLayout({ children }) {
       </head>
       <body className="overflow-x-hidden antialiased">
         {/* @ts-expect-error Async Server Component */}
-        <Header />
+        {/* <Header /> */}
         {children}
         <PrismicPreview repositoryName={repositoryName} />
       </body>

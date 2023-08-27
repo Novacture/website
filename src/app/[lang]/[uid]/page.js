@@ -4,6 +4,8 @@ import * as prismic from "@prismicio/client"
 
 import { createClient } from "@/prismicio"
 import { components } from "@/slices"
+import { Layout } from "@/components/Layout"
+import { getLocales } from "@/lib/getLocales"
 
 /**
  * This page renders a Prismic Document dynamically based on the URL.
@@ -19,8 +21,10 @@ import { components } from "@/slices"
  */
 export async function generateMetadata({ params }) {
   const client = createClient()
-  const page = await client.getByUID("page", params.uid).catch(() => notFound())
-  const settings = await client.getSingle("settings")
+  const page = await client
+    .getByUID("page", params.uid, { lang: params.lang })
+    .catch(() => notFound())
+  const settings = await client.getSingle("settings", { lang: params.lang })
 
   return {
     title: `${prismic.asText(page.data.title)} | ${prismic.asText(
@@ -43,9 +47,22 @@ export async function generateMetadata({ params }) {
  */
 export default async function Page({ params }) {
   const client = createClient()
-  const page = await client.getByUID("page", params.uid).catch(() => notFound())
 
-  return <SliceZone slices={page.data.slices} components={components} />
+  const page = await client
+    .getByUID("page", params.uid, { lang: params.lang })
+    .catch(() => notFound())
+  const navigation = await client.getSingle("navigation", {
+    lang: params.lang
+  })
+  const settings = await client.getSingle("settings", { lang: params.lang })
+
+  const locales = await getLocales(page, client)
+
+  return (
+    <Layout locales={locales} navigation={navigation} settings={settings}>
+      <SliceZone slices={page.data.slices} components={components} />
+    </Layout>
+  )
 }
 
 export async function generateStaticParams() {
@@ -55,13 +72,14 @@ export async function generateStaticParams() {
    * Query all Documents from the API, except the homepage.
    */
   const pages = await client.getAllByType("page", {
-    predicates: [prismic.filter.not("my.page.uid", "home")]
+    predicates: [prismic.filter.not("my.page.uid", "home")],
+    lang: "*"
   })
 
   /**
    * Define a path for every Document.
    */
   return pages.map((page) => {
-    return { uid: page.uid }
+    return { uid: page.uid, lang: page.lang }
   })
 }

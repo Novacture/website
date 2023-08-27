@@ -176,6 +176,95 @@ interface SettingsDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   sitedescription: prismic.KeyTextField;
+
+  /**
+   * Logo field in *Settings*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.logo
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  logo: prismic.ImageField<never>;
+
+  /**
+   * newsletter_bar field in *Settings*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: settings.newsletter_bar
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  newsletter_bar: prismic.BooleanField;
+
+  /**
+   * Newsletter Description field in *Settings*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Text above the sign up form
+   * - **API ID Path**: settings.newsletterDescription
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  newsletterDescription: prismic.RichTextField;
+
+  /**
+   * Newsletter Disclaimer field in *Settings*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Small text below sign up form
+   * - **API ID Path**: settings.newsletterDisclaimer
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  newsletterDisclaimer: prismic.RichTextField;
+
+  /**
+   * contactText field in *Settings*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.contact_text
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  contact_text: prismic.KeyTextField;
+
+  /**
+   * contactPhone field in *Settings*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.contact_phone
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  contact_phone: prismic.KeyTextField;
+
+  /**
+   * contactEmail field in *Settings*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.contact_email
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  contact_email: prismic.KeyTextField;
+
+  /**
+   * address field in *Settings*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.address
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  address: prismic.KeyTextField;
 }
 
 /**

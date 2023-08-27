@@ -1,9 +1,11 @@
 import { notFound } from "next/navigation"
+import { getLocales } from "@/lib/getLocales"
 import { SliceZone } from "@prismicio/react"
 import * as prismic from "@prismicio/client"
 
 import { createClient } from "@/prismicio"
 import { components } from "@/slices"
+import { Layout } from "@/components/Layout"
 
 /**
  * This component renders your homepage.
@@ -16,9 +18,9 @@ import { components } from "@/slices"
 /**
  * @returns {Promise<import("next").Metadata>}
  */
-export async function generateMetadata() {
+export async function generateMetadata({ params: { lang } }) {
   const client = createClient()
-  const home = await client.getByUID("page", "home")
+  const home = await client.getByUID("page", "home", { lang })
 
   return {
     title: prismic.asText(home.data.title),
@@ -34,12 +36,22 @@ export async function generateMetadata() {
   }
 }
 
-export default async function Index() {
+export default async function Index({ params: { lang } }) {
   /**
    * The client queries content from the Prismic API
    */
   const client = createClient()
-  const home = await client.getByUID("page", "home").catch(() => notFound())
+  const home = await client
+    .getByUID("page", "home", { lang })
+    .catch(() => notFound())
+  const navigation = await client.getSingle("navigation", { lang })
+  const settings = await client.getSingle("settings", { lang })
 
-  return <SliceZone slices={home.data.slices} components={components} />
+  const locales = await getLocales(home, client)
+
+  return (
+    <Layout locales={locales} navigation={navigation} settings={settings}>
+      <SliceZone slices={home.data.slices} components={components} />
+    </Layout>
+  )
 }

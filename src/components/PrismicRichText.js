@@ -1,7 +1,7 @@
-import { PrismicNextLink } from "@prismicio/next";
-import { PrismicRichText as BasePrismicRichText } from "@prismicio/react";
+import { PrismicNextLink } from "@prismicio/next"
+import { PrismicRichText as BasePrismicRichText } from "@prismicio/react"
 
-import { Heading } from "./Heading";
+import { Heading } from "./Heading"
 
 /** @type {import("@prismicio/react").JSXMapSerializer} */
 const defaultComponents = {
@@ -48,8 +48,8 @@ const defaultComponents = {
     >
       {children}
     </PrismicNextLink>
-  ),
-};
+  )
+}
 
 export function PrismicRichText({ components, ...props }) {
   return (
@@ -57,5 +57,5 @@ export function PrismicRichText({ components, ...props }) {
       components={{ ...defaultComponents, ...components }}
       {...props}
     />
-  );
+  )
 }
